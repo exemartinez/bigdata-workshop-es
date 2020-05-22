@@ -5,6 +5,7 @@ WORKDIR /notebook
 
 COPY requirements.txt /tmp/
 COPY build_image_igwn.sh /tmp/
+COPY igwn-py37.yaml /tmp/
 
 RUN chmod 777 /tmp/build_image_igwn.sh && \
     bash /tmp/build_image_igwn.sh

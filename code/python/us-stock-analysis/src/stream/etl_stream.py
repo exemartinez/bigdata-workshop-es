@@ -59,27 +59,28 @@ def start_stream(args):
     ####################################
     # Stream to Parquet
     ####################################
-    query = stocks \
-        .withColumn('year', year(F.col('timestamp'))) \
-        .withColumn('month', month(F.col('timestamp'))) \
-        .withColumn('day', dayofmonth(F.col('timestamp'))) \
-        .withColumn('hour', hour(F.col('timestamp'))) \
-        .withColumn('minute', minute(F.col('timestamp'))) \
-        .writeStream \
-        .format('parquet') \
-        .partitionBy('year', 'month', 'day', 'hour', 'minute') \
-        .option('startingOffsets', 'earliest') \
-        .option('checkpointLocation', '/dataset/checkpoint') \
-        .option('path', '/dataset/streaming.parquet') \
-        .trigger(processingTime='30 seconds') \
-        .start()
+    
+    # query = stocks \
+    #     .withColumn('year', year(F.col('timestamp'))) \
+    #     .withColumn('month', month(F.col('timestamp'))) \
+    #     .withColumn('day', dayofmonth(F.col('timestamp'))) \
+    #     .withColumn('hour', hour(F.col('timestamp'))) \
+    #     .withColumn('minute', minute(F.col('timestamp'))) \
+    #     .writeStream \
+    #     .format('parquet') \
+    #     .partitionBy('year', 'month', 'day', 'hour', 'minute') \
+    #     .option('startingOffsets', 'earliest') \
+    #     .option('checkpointLocation', '/dataset/checkpoint') \
+    #     .option('path', '/dataset/streaming.parquet') \
+    #     .trigger(processingTime='30 seconds') \
+    #     .start()
 
-    query.awaitTermination()
+    # query.awaitTermination()
+    
 
-
-    # avg_pricing = stocks \
-    #     .groupBy(F.col("symbol")) \
-    #     .agg(F.avg(F.col("price")).alias("avg_price"))
+    avg_pricing = stocks \
+        .groupBy(F.col("symbol")) \
+        .agg(F.avg(F.col("price")).alias("avg_price"))
 
     ####################################
     # Console Output
@@ -102,7 +103,7 @@ def start_stream(args):
     #     .format("memory") \
     #     .trigger(processingTime="10 seconds") \
     #     .start()
-    #
+    
     # while True:
     #     print('\n' + '_' * 30)
     #     # interactively query in-memory table
@@ -121,12 +122,12 @@ def start_stream(args):
     # query.awaitTermination()
 
     # Average Price Aggregation
-    # query = stream_aggregation_to_postgres(stocks)
-    # query.awaitTermination()
+    query = stream_aggregation_to_postgres(stocks)
+    query.awaitTermination()
 
     # Final Average Price Aggregation with Timestamp columns
-    # query = stream_aggregation_to_postgres_final(stocks)
-    # query.awaitTermination()
+    query = stream_aggregation_to_postgres_final(stocks)
+    query.awaitTermination()
 
     pass
 

@@ -10,6 +10,7 @@ derby.log
 metastore_db
 streaming.parquet
 dataset/output.parquet/
+dataset/
 
 # Superset Dashboard
 superset/conf/.setup-complete

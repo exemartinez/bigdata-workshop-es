@@ -6,6 +6,7 @@ from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
+import logging
 
 STORE_DIR = Path(__file__).resolve().parent / 'tmp-files' / 'random-num'
 Path.mkdir(STORE_DIR, exist_ok=True, parents=True)
@@ -14,8 +15,10 @@ bash_cmd = f"echo $(( ( RANDOM % 10 )  + 1 )) > {str(STORE_DIR / 'random_number.
 
 def _read_number_and_square(store_dir):
     fn = str(store_dir / 'random_number.txt')
+    logging.info(f"The file name was {fn}")
     with open(fn, 'r') as f:
         n = f.readline()
+        logging.info(f"Readed line: {n}")
     return int(n) ** 2
 
 

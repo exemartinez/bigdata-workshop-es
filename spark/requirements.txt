@@ -12,4 +12,4 @@ gensim
 pyarrow==0.14.1
 
 # Deps for fake_stock_price_gen
-kafka-python==2.0.1
+#kafka-python==2.0.1
