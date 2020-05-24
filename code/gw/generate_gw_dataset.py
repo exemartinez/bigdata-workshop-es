@@ -4,6 +4,12 @@ This script just generates a csv file with the dataframe that we will need as a 
 '''
 
 import numpy as np
+import findspark
+
+findspark.init() #this allows us to find the libs for the usage of spark.
+
+from pyspark.sql import SparkSession
+from pyspark.sql import SQLContext
 import h5py
 import os
 import pandas as pd
@@ -16,6 +22,7 @@ hf = h5py.File(hd5f_file, 'r')
 
 #first, we get the dataframe in pandas with all the headers for the data.
 csv = '/dataset/trainingset_v1d1_metadata.csv'
+parquet='/dataset/gw_gravity_spy_dataframe.parquet'
 df=pd.read_csv(csv, sep=',',header=0)
 
 #forming a new dataset
@@ -37,7 +44,7 @@ for index, record in gwdf.iterrows():
     
     png = np.array(hf[label][sample_type][gravityspy_id]['0.5.png'][0])
     
-    png = np.reshape(png,23800) #we place the whole image in just one dimension array.
+    png = np.reshape(png,23800).tolist()  #we place the whole image in just one dimension array. 140x170 (remember this)
     
     gwdf.at[index, 'png'] = png
 
@@ -45,6 +52,13 @@ for index, record in gwdf.iterrows():
 
 print("Main procedures finished. Saving...")
 
-gwdf.to_pickle('/dataset/gw_gravity_spy_dataframe.pickle')   
+findspark.init()
+spark = SparkSession.builder.appName("pyspark-gw").getOrCreate()
 
-print("File saved.")
+sqlCtx = SQLContext(spark)
+sdf = sqlCtx.createDataFrame(gwdf) #getting a spark dataframe out of a Pandas dataframe.   
+
+# We use the spark dataset to write its contents (all the gravity spy's dataset) to a partquet file for easy classification. 
+sdf.write.parquet(parquet)
+
+print("File saved as parquet." + parquet)
