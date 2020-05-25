@@ -3,6 +3,7 @@ Author: Ezequiel H. Martinez
 This script just generates a csv file with the dataframe that we will need as a parquet fortmat later.
 '''
 
+import gc
 import numpy as np
 import findspark
 
@@ -27,12 +28,13 @@ parquet='/dataset/gw_gravity_spy_dataframe.parquet'
 df=pd.read_csv(csv, sep=',',header=0)
 
 findspark.init()
+
 spark = SparkSession.builder.appName("pyspark-gw").getOrCreate()
 sqlCtx = SQLContext(spark)
 
 #forming a new dataset - for everyblock block
 block_number = 1
-block = 1138
+block = 569 #maximum block of rows that resists this spark config. To increase it, change spark.drive.memory.
 begin = 0
 end = block * block_number
 all_records = 7966
@@ -70,10 +72,17 @@ for block_init in range(begin, all_records, block): # will process 7 different b
     sdf = sqlCtx.createDataFrame(gwdf) #getting a spark dataframe out of a Pandas dataframe.   
 
     # We use the spark dataset to write its contents (all the gravity spy's dataset) to a partquet file for easy classification. 
+    #.option("path", "/dataset/gw_gravity_spy_dataframe_" + str(block_init)) \
+
     sdf.write.format("parquet") \
-    .partitionBy("gravityspy_id","sample_type") \
-    .option("path", "/dataset/gw_gravity_spy_dataframe_" + block_init) \
-    .mode("overwrite") \
-    .saveAsTable("gw_gravity_spy" + block_init)    
+    .partitionBy("gravityspy_id","label","sample_type") \
+    .option("path", "/dataset/gw_gravity_spy_dataframe") \
+    .mode("append") \
+    .saveAsTable("gw_gravity_spy")    
     
     print("File saved block {0} to {1}...as parquet.".format(block_init, block_init + block))
+
+    gwdf = None
+    sdf = None
+
+    gc.collect()

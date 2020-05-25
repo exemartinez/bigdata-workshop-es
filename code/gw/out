@@ -1,4 +1,5 @@
-The shape of the matrix to be processed is (7966, 29)
+Processing block 0 to 569...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #0 processed
 Record #1 processed
 Record #2 processed
@@ -568,6 +569,10 @@ Record #565 processed
 Record #566 processed
 Record #567 processed
 Record #568 processed
+Main procedures finished. Saving block...
+File saved block 0 to 569...as parquet.
+Processing block 569 to 1138...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #569 processed
 Record #570 processed
 Record #571 processed
@@ -1137,6 +1142,10 @@ Record #1134 processed
 Record #1135 processed
 Record #1136 processed
 Record #1137 processed
+Main procedures finished. Saving block...
+File saved block 569 to 1138...as parquet.
+Processing block 1138 to 1707...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #1138 processed
 Record #1139 processed
 Record #1140 processed
@@ -1706,6 +1715,10 @@ Record #1703 processed
 Record #1704 processed
 Record #1705 processed
 Record #1706 processed
+Main procedures finished. Saving block...
+File saved block 1138 to 1707...as parquet.
+Processing block 1707 to 2276...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #1707 processed
 Record #1708 processed
 Record #1709 processed
@@ -2275,6 +2288,10 @@ Record #2272 processed
 Record #2273 processed
 Record #2274 processed
 Record #2275 processed
+Main procedures finished. Saving block...
+File saved block 1707 to 2276...as parquet.
+Processing block 2276 to 2845...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #2276 processed
 Record #2277 processed
 Record #2278 processed
@@ -2844,6 +2861,10 @@ Record #2841 processed
 Record #2842 processed
 Record #2843 processed
 Record #2844 processed
+Main procedures finished. Saving block...
+File saved block 2276 to 2845...as parquet.
+Processing block 2845 to 3414...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #2845 processed
 Record #2846 processed
 Record #2847 processed
@@ -3413,6 +3434,10 @@ Record #3410 processed
 Record #3411 processed
 Record #3412 processed
 Record #3413 processed
+Main procedures finished. Saving block...
+File saved block 2845 to 3414...as parquet.
+Processing block 3414 to 3983...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #3414 processed
 Record #3415 processed
 Record #3416 processed
@@ -3982,6 +4007,10 @@ Record #3979 processed
 Record #3980 processed
 Record #3981 processed
 Record #3982 processed
+Main procedures finished. Saving block...
+File saved block 3414 to 3983...as parquet.
+Processing block 3983 to 4552...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #3983 processed
 Record #3984 processed
 Record #3985 processed
@@ -4551,6 +4580,10 @@ Record #4548 processed
 Record #4549 processed
 Record #4550 processed
 Record #4551 processed
+Main procedures finished. Saving block...
+File saved block 3983 to 4552...as parquet.
+Processing block 4552 to 5121...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #4552 processed
 Record #4553 processed
 Record #4554 processed
@@ -5120,6 +5153,10 @@ Record #5117 processed
 Record #5118 processed
 Record #5119 processed
 Record #5120 processed
+Main procedures finished. Saving block...
+File saved block 4552 to 5121...as parquet.
+Processing block 5121 to 5690...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #5121 processed
 Record #5122 processed
 Record #5123 processed
@@ -5689,6 +5726,10 @@ Record #5686 processed
 Record #5687 processed
 Record #5688 processed
 Record #5689 processed
+Main procedures finished. Saving block...
+File saved block 5121 to 5690...as parquet.
+Processing block 5690 to 6259...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #5690 processed
 Record #5691 processed
 Record #5692 processed
@@ -6258,6 +6299,10 @@ Record #6255 processed
 Record #6256 processed
 Record #6257 processed
 Record #6258 processed
+Main procedures finished. Saving block...
+File saved block 5690 to 6259...as parquet.
+Processing block 6259 to 6828...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #6259 processed
 Record #6260 processed
 Record #6261 processed
@@ -6827,6 +6872,10 @@ Record #6824 processed
 Record #6825 processed
 Record #6826 processed
 Record #6827 processed
+Main procedures finished. Saving block...
+File saved block 6259 to 6828...as parquet.
+Processing block 6828 to 7397...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #6828 processed
 Record #6829 processed
 Record #6830 processed
@@ -7396,6 +7445,10 @@ Record #7393 processed
 Record #7394 processed
 Record #7395 processed
 Record #7396 processed
+Main procedures finished. Saving block...
+File saved block 6828 to 7397...as parquet.
+Processing block 7397 to 7966...as parquet.
+The shape of the matrix to be processed is (569, 29)
 Record #7397 processed
 Record #7398 processed
 Record #7399 processed
@@ -7965,4 +8018,5 @@ Record #7962 processed
 Record #7963 processed
 Record #7964 processed
 Record #7965 processed
-Main procedures finished. Saving...
+Main procedures finished. Saving block...
+File saved block 7397 to 7966...as parquet.
