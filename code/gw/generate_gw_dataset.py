@@ -9,6 +9,7 @@ import findspark
 
 findspark.init() #this allows us to find the libs for the usage of spark.
 
+from pyspark.ml.linalg import Vectors
 from pyspark.sql import SparkSession
 from pyspark.sql import SQLContext
 import h5py
@@ -26,8 +27,6 @@ csv = '/dataset/trainingset_v1d1_metadata.csv'
 parquet='/dataset/gw_gravity_spy_dataframe.parquet'
 
 df=pd.read_csv(csv, sep=',',header=0)
-
-findspark.init()
 
 spark = SparkSession.builder.appName("pyspark-gw").getOrCreate()
 sqlCtx = SQLContext(spark)
@@ -61,7 +60,7 @@ for block_init in range(begin, all_records, block): # will process 7 different b
         
         png = np.array(hf[label][sample_type][gravityspy_id]['0.5.png'][0])
         
-        png = np.reshape(png,23800).tolist()  #we place the whole image in just one dimension array. 140x170 (remember this)
+        png = Vectors.dense(np.reshape(png,23800).tolist())  #we place the whole image in just one dimension array. 140x170 (remember this)
         
         gwdf.at[index, 'png'] = png
 
