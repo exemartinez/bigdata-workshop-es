@@ -12,15 +12,15 @@ El presente trabajo esta escrito y construido con la intencion de ser los primer
 
 A continuacion se detallan los pasos que hemos dado para conseguir los objetivos arriba descriptos:
 
-    1. Hemos creado una nueva [imagen Docker](spark/Dockerfile) de spark con todas las librerias necesarias para poder correr los [ejemplos y tutoriales](jupyter/) para entender como trabajar con ondas gravitacionales. 
-        > Hemos corrido todos los tutoriales instalados en la carpeta *jupiter*. Los mismos son aquellos notebooks que comienzan con "Tuto x.x". Los mismos funcionan solo bajo el kernel *igwn-py37*.
-    2. Hemos downlodeado los [datasets](https://zenodo.org/record/1486046#.XrLYbi-ZMSQ) necesairios y hemos trabajado en la creacion de tres notebooks que realizan:
-    
-        * Procesar los datos (3.5Gb) en un formato parquet que sea mas util para su tratamiento en un classificador.
-        * Almacenamos los dataframes en formato parquet.
-        * Entrenado un clasificador en Spark MLlib e intentado trabajarlo en Pandas (sin exito dado las dimensiones del dataset involucrado).
-        
-    Los notebooks cuentan con scripts en Python que realizan el procesamiento *batch* de la informacion. La ejecucion y lectura de los mismos deberia ser en el siguiente ordern:
+1. Hemos creado una nueva [imagen Docker](spark/Dockerfile) de spark con todas las librerias necesarias para poder correr los [ejemplos y tutoriales](jupyter/) para entender como trabajar con ondas gravitacionales. 
+    > Hemos corrido todos los tutoriales instalados en la carpeta *jupiter*. Los mismos son aquellos notebooks que comienzan con "Tuto x.x". Los mismos funcionan solo bajo el kernel *igwn-py37*.
+2. Hemos downlodeado los [datasets](https://zenodo.org/record/1486046#.XrLYbi-ZMSQ) necesairios y hemos trabajado en la creacion de tres notebooks que realizan:
+
+    * Procesar los datos (3.5Gb) en un formato parquet que sea mas util para su tratamiento en un classificador.
+    * Almacenamos los dataframes en formato parquet.
+    * Entrenado un clasificador en Spark MLlib e intentado trabajarlo en Pandas (sin exito dado las dimensiones del dataset involucrado).
+
+Los notebooks cuentan con scripts en Python que realizan el procesamiento *batch* de la informacion. La ejecucion y lectura de los mismos deberia ser en el siguiente ordern:
 
 1. Abrir el primer notebook [LIGO - Loading of the training dataset](jupyter/notebook/LIGO - Loading of the training dataset.ipynb). El mismo esta escrito en idioma ingles y da una idea de como esta estructurado todo el trabajo. El dataset se limita a solo 569 rows; procesamos todo el dataset en el paso 2.
 2. Ejecutar el script [generate_gw_dataset.py](code/gw/generate_gw_dataset.py); este script generara los archivos parquet con la consolidacion de todos los datos que vamos a necesitar para el trabajo final.
@@ -34,5 +34,8 @@ A continuacion se detallan los pasos que hemos dado para conseguir los objetivos
 ## Conclusiones
 
 Estos son, solamente, los primeros pasos necesarios como para poder entrenar un modelo capaz de identificar ondas gravitacionales ("Chrips", segun entendemos se los clasifica en el dataset). Un trabajo mas completo deberia intentar optimizar lo mas posible los hiperparametros, manejar adecuadamente la memoria con la que corre Spark y ver si se puede utilizar una libreria como Keras o SVMs no lineales.
+
+## Remarks
+La imagen utiliza y construida en docker es bastante grande (casi 10gb solo en librerias de Python y especificas de GW). Quizas convendria mas utilizar la imagen ya subida a [DockerHub](https://hub.docker.com/repository/docker/hernanemartinez/spark-igwn)
 
 
