@@ -15,10 +15,13 @@ A continuacion se detallan los pasos que hemos dado para conseguir los objetivos
     1. Hemos creado una nueva [imagen Docker](spark/Dockerfile) de spark con todas las librerias necesarias para poder correr los [ejemplos y tutoriales](jupyter/) para entender como trabajar con ondas gravitacionales. 
         > Hemos corrido todos los tutoriales instalados en la carpeta *jupiter*. Los mismos son aquellos notebooks que comienzan con "Tuto x.x". Los mismos funcionan solo bajo el kernel *igwn-py37*.
     2. Hemos downlodeado los [datasets](https://zenodo.org/record/1486046#.XrLYbi-ZMSQ) necesairios y hemos trabajado en la creacion de tres notebooks que realizan:
+    
         * Procesar los datos (3.5Gb) en un formato parquet que sea mas util para su tratamiento en un classificador.
         * Almacenamos los dataframes en formato parquet.
         * Entrenado un clasificador en Spark MLlib e intentado trabajarlo en Pandas (sin exito dado las dimensiones del dataset involucrado).
+        
     Los notebooks cuentan con scripts en Python que realizan el procesamiento *batch* de la informacion. La ejecucion y lectura de los mismos deberia ser en el siguiente ordern:
+    
         1. Abrir el primer notebook [LIGO - Loading of the training dataset](jupyter/notebook/LIGO - Loading of the training dataset.ipynb). El mismo esta escrito en idioma ingles y da una idea de como esta estructurado todo el trabajo. El dataset se limita a solo 569 rows; procesamos todo el dataset en el paso 2.
         2. Ejecutar el script [generate_gw_dataset.py](code/gw/generate_gw_dataset.py); este script generara los archivos parquet con la consolidacion de todos los datos que vamos a necesitar para el trabajo final.
         3. Continuar con el segundo notebook [LIGO - Training classifier to identify Gravitational Waves](jupyter/notebook/LIGO - Training classifier to identify Gravitational Waves.ipynb), donde se intenta preparar el training set y entrenar un modelo de SVC linear. De nuevo, este dataset esta limitado. Procesamos todo el dataset en el paso 4.
