@@ -36,6 +36,6 @@ Los notebooks cuentan con scripts en Python que realizan el procesamiento *batch
 Estos son, solamente, los primeros pasos necesarios como para poder entrenar un modelo capaz de identificar ondas gravitacionales ("Chrips", segun entendemos se los clasifica en el dataset). Un trabajo mas completo deberia intentar optimizar lo mas posible los hiperparametros, manejar adecuadamente la memoria con la que corre Spark y ver si se puede utilizar una libreria como Keras o SVMs no lineales.
 
 ## Remarks
-La imagen utiliza y construida en docker es bastante grande (casi 10gb solo en librerias de Python y especificas de GW). Quizas convendria mas utilizar la imagen ya subida a [DockerHub](https://hub.docker.com/repository/docker/hernanemartinez/spark-igwn)
+La imagen utiliza y construida en docker es bastante grande (casi 10gb solo en librerias de Python y especificas de GW). Quizas convendria mas utilizar la imagen ya subida a [DockerHub](https://hub.docker.com/repository/docker/hernanemartinez/spark-igwn) que volver a construirla desde cero. 
 
 
