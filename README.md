@@ -1,67 +1,35 @@
-# Workshop de Big Data con Apache Spark [🇪🇸]
-Material del Workshopde Big Data
+# Workshop de Big Data con Apache Spark - Trabajo final por Ezequiel H. Martinez[🇪🇸]
 
-## Contenidos
-* [Levantar el ambiente](#levantar-ambiente)
-* [Introducción a Scala](scala/README.md)
-* [Batch Processing (Scala)](README-batch.md)
-* [Structured Streaming Processing (Scala)](README-streaming.md)
-* [Machine Learning (Scala)](README-ml.md)
-* [Jupyter Notebook (Python / pySpark)](README-pyspark.md)
-* [Lista de Jupyter Notebook](jupyter/notebook/README.md)
+El presente trabajo esta escrito y construido con la intencion de ser los primeros pasos hacia mi trabajo final de especializacion. Nuestra tesis de especializacion trata acerca de la clasificacion de espectrogramas de ondas gravitacionales. Pretendemos trabajar en la preparacion de los datos, el ambiente, y la clasficacion basica del set de entrenamiento a utilizar. Nuestro objetivo principal es entender de que manera podriamos aprovechar las capacidades de Docker, Spark y MLlib para la creacion de la tesis.
 
-## Infrastructura
+## Objetivos
 
-El workshop simula una instalación de producción utilizando container de Docker.
-[docker-compose.yml](docker-compose.yml) contiene las definiciones y configuraciones para esos servicios y sus respectivas UIs:
+* Preparar el ambiente para el tratamiento de ondas gravitacionales.
+* Entrenar al menos un clasificador de ondas gravitacionales con Spark.
+* Comprender mejor la estructura de los datos disponibles.
 
-* Apache Spark: [Spark Master UI](http://localhost:8080) | [Job Progress](http://localhost:4040)
-* Apache Kafka:
-* Postgres:
-* [Superset](http://superset.incubator.apache.org): [Nuestro Dashboard](http://localhost:8088/)
+## Tareas realizadas
 
-Los puertos de acceso a cada servicio quedaron los defaults. Ej: **spark master:7077**, **postgres: 5432**
+A continuacion se detallan los pasos que hemos dado para conseguir los objetivos arriba descriptos:
 
-## Levantar ambiente
+    1. Hemos creado una nueva [imagen Docker](spark/Dockerfile) de spark con todas las librerias necesarias para poder correr los [ejemplos y tutoriales](jupyter/) para entender como trabajar con ondas gravitacionales. 
+        > Hemos corrido todos los tutoriales instalados en la carpeta *jupiter*. Los mismos son aquellos notebooks que comienzan con "Tuto x.x". Los mismos funcionan solo bajo el kernel *igwn-py37*.
+    2. Hemos downlodeado los [datasets](https://zenodo.org/record/1486046#.XrLYbi-ZMSQ) necesairios y hemos trabajado en la creacion de tres notebooks que realizan:
+        * Procesar los datos (3.5Gb) en un formato parquet que sea mas util para su tratamiento en un classificador.
+        * Almacenamos los dataframes en formato parquet.
+        * Entrenado un clasificador en Spark MLlib e intentado trabajarlo en Pandas (sin exito dado las dimensiones del dataset involucrado).
+    Los notebooks cuentan con scripts en Python que realizan el procesamiento *batch* de la informacion. La ejecucion y lectura de los mismos deberia ser en el siguiente ordern:
+        1. Abrir el primer notebook [LIGO - Loading of the training dataset](jupyter/notebook/LIGO - Loading of the training dataset.ipynb). El mismo esta escrito en idioma ingles y da una idea de como esta estructurado todo el trabajo. El dataset se limita a solo 569 rows; procesamos todo el dataset en el paso 2.
+        2. Ejecutar el script [generate_gw_dataset.py](code/gw/generate_gw_dataset.py); este script generara los archivos parquet con la consolidacion de todos los datos que vamos a necesitar para el trabajo final.
+        3. Continuar con el segundo notebook [LIGO - Training classifier to identify Gravitational Waves](jupyter/notebook/LIGO - Training classifier to identify Gravitational Waves.ipynb), donde se intenta preparar el training set y entrenar un modelo de SVC linear. De nuevo, este dataset esta limitado. Procesamos todo el dataset en el paso 4.
+        4. Ejecutar el script [training_linearsvc_gw.py](code/gw/training_linearsvc_gw.py). El mismo generara un modelo y lo salvara en disco como parquet.
+        5. Ejecutar el script [linear_svc_test.py](code/gw/linearsvc_test.py). El mismo aplicara el modelo entrenado a el set de espectrogramas de test.
+        6. Finalmente, en [LIGO - Checking predictions](jupyter/notebook/LIGO - Checking predictions.ipynb) realizamos una tareas "opcional" (pero no menos esencial) de chequeo del modelo. (Establecemos el % de efectividad del modelo mediante la identificacion del area bajo la curva ROC)
 
-Instalar el ambiente [siguiendo las instrucciones acá](INSTALL.md).
+    > El trabajo, los comentarios, y practicamente todo el material esta en idioma *ingles*. Se tomo esta decision a sabiendas que el claustro docente maneja el idioma y con la intencion de poder compartir este trabajo de forma internacional con mis contactos en el MIT y CalTech(LIGO).
 
-Correr el script que levanta el ambiente `Usage: control-env.sh (start|stop|cleanup)`:
+## Conclusiones
 
-```bash
-./control-env.sh start
-
-**IMPORTANTE** el script `control-env.sh cleanup` borra cualquier dado que haya sido procesado anteriormente.
+Estos son, solamente, los primeros pasos necesarios como para poder entrenar un modelo capaz de identificar ondas gravitacionales ("Chrips", segun entendemos se los clasifica en el dataset). Un trabajo mas completo deberia intentar optimizar lo mas posible los hiperparametros, manejar adecuadamente la memoria con la que corre Spark y ver si se puede utilizar una libreria como Keras o SVMs no lineales.
 
 
-# Access Spark-Master and run spark-shell
-docker exec -it master bash
-root@588acf96a879:/app# spark-shell
-```
-Probar:
-
-```scala
-val file = sc.textFile("/dataset/yahoo-symbols-201709.csv")
-file.count
-file.take(10).foreach(println)
-```
-
-Acceder al [Spark Master: http://localhost:8080](http://localhost:8080) y [SPARK-UI: http://localhost:4040](http://localhost:4040).
-
-### Troubleshooting
-
-Si los jobs mueren (`KILLED`) y no se completan puede ser debido a la memória disponible para Docker, **aumente la memoria > 8Gb** al proceso de Docker:
-
-![](./images/docker-advanced-config.jpg)
-
-# Siga leyendo
-* [Introducción a Scala](scala/README.md)
-* [Jupyter Notebook (Python / pySpark)](README-pyspark.md)
-
-## Agradecimientos
-* Juan Pampliega ([MuttData](https://www.muttdata.ai/)): expandir y actualizar el ejemplo de [Spark Streaming](README-streaming.md)
-* Pedro Ferrari ([MuttData](https://www.muttdata.ai/)): crear el notebook de [pySpark con Machine Learning](./jupyter/notebook/titanic/)
-
-## Sobre
-Gustavo Arjones &copy; 2017-2020  
-[arjon.es](https://arjon.es) | [LinkedIn](http://linkedin.com/in/arjones/) | [Twitter](https://twitter.com/arjones)
