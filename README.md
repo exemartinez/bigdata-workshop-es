@@ -21,15 +21,15 @@ A continuacion se detallan los pasos que hemos dado para conseguir los objetivos
         * Entrenado un clasificador en Spark MLlib e intentado trabajarlo en Pandas (sin exito dado las dimensiones del dataset involucrado).
         
     Los notebooks cuentan con scripts en Python que realizan el procesamiento *batch* de la informacion. La ejecucion y lectura de los mismos deberia ser en el siguiente ordern:
-    
-        1. Abrir el primer notebook [LIGO - Loading of the training dataset](jupyter/notebook/LIGO - Loading of the training dataset.ipynb). El mismo esta escrito en idioma ingles y da una idea de como esta estructurado todo el trabajo. El dataset se limita a solo 569 rows; procesamos todo el dataset en el paso 2.
-        2. Ejecutar el script [generate_gw_dataset.py](code/gw/generate_gw_dataset.py); este script generara los archivos parquet con la consolidacion de todos los datos que vamos a necesitar para el trabajo final.
-        3. Continuar con el segundo notebook [LIGO - Training classifier to identify Gravitational Waves](jupyter/notebook/LIGO - Training classifier to identify Gravitational Waves.ipynb), donde se intenta preparar el training set y entrenar un modelo de SVC linear. De nuevo, este dataset esta limitado. Procesamos todo el dataset en el paso 4.
-        4. Ejecutar el script [training_linearsvc_gw.py](code/gw/training_linearsvc_gw.py). El mismo generara un modelo y lo salvara en disco como parquet.
-        5. Ejecutar el script [linear_svc_test.py](code/gw/linearsvc_test.py). El mismo aplicara el modelo entrenado a el set de espectrogramas de test.
-        6. Finalmente, en [LIGO - Checking predictions](jupyter/notebook/LIGO - Checking predictions.ipynb) realizamos una tareas "opcional" (pero no menos esencial) de chequeo del modelo. (Establecemos el % de efectividad del modelo mediante la identificacion del area bajo la curva ROC)
 
-    > El trabajo, los comentarios, y practicamente todo el material esta en idioma *ingles*. Se tomo esta decision a sabiendas que el claustro docente maneja el idioma y con la intencion de poder compartir este trabajo de forma internacional con mis contactos en el MIT y CalTech(LIGO).
+1. Abrir el primer notebook [LIGO - Loading of the training dataset](jupyter/notebook/LIGO - Loading of the training dataset.ipynb). El mismo esta escrito en idioma ingles y da una idea de como esta estructurado todo el trabajo. El dataset se limita a solo 569 rows; procesamos todo el dataset en el paso 2.
+2. Ejecutar el script [generate_gw_dataset.py](code/gw/generate_gw_dataset.py); este script generara los archivos parquet con la consolidacion de todos los datos que vamos a necesitar para el trabajo final.
+3. Continuar con el segundo notebook [LIGO - Training classifier to identify Gravitational Waves](jupyter/notebook/LIGO - Training classifier to identify Gravitational Waves.ipynb), donde se intenta preparar el training set y entrenar un modelo de SVC linear. De nuevo, este dataset esta limitado. Procesamos todo el dataset en el paso 4.
+4. Ejecutar el script [training_linearsvc_gw.py](code/gw/training_linearsvc_gw.py). El mismo generara un modelo y lo salvara en disco como parquet.
+5. Ejecutar el script [linear_svc_test.py](code/gw/linearsvc_test.py). El mismo aplicara el modelo entrenado a el set de espectrogramas de test.
+6. Finalmente, en [LIGO - Checking predictions](jupyter/notebook/LIGO - Checking predictions.ipynb) realizamos una tareas "opcional" (pero no menos esencial) de chequeo del modelo. (Establecemos el % de efectividad del modelo mediante la identificacion del area bajo la curva ROC)
+
+> El trabajo, los comentarios, y practicamente todo el material esta en idioma *ingles*. Se tomo esta decision a sabiendas que el claustro docente maneja el idioma y con la intencion de poder compartir este trabajo de forma internacional con mis contactos en el MIT y CalTech(LIGO).
 
 ## Conclusiones
 
