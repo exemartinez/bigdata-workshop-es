@@ -10,6 +10,7 @@ import numpy as np
 # load the dataset
 image_file='/home/osboxes/Documents/bigdata-workshop-es/dataset/gw_%s_images.npy'
 labels_file='/home/osboxes/Documents/bigdata-workshop-es/dataset/gw_%s_labels.npy'
+model_file = '/home/osboxes/Documents/bigdata-workshop-es/models/gw_convnet.model'
 
 SHAPE_SIZE_X = 140
 SHAPE_SIZE_Y = 170
@@ -38,6 +39,8 @@ model.summary()
 model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 model.fit(images, labels, epochs=5, batch_size=64)
 
+model.save(model_file)
+
 # load the test set
 
 images = np.load(image_file % "test")
@@ -46,8 +49,8 @@ labels = np.load(labels_file % "test")
 
 test_loss, test_acc = model.evaluate(images, labels)
 
-print("Convolutional Network model LOSS: %d" % test_loss)
-print("Convolutional Network model ACCURACY: %d" % test_acc)
+print("Convolutional Network model LOSS: %s" % str(test_loss))
+print("Convolutional Network model ACCURACY: %s" % str(test_acc))
 
 # predict the test set
 
